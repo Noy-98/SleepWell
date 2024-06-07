@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="20dp"
+    app:cardBackgroundColor="@color/f8f8f8"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:background="@drawable/heart_rate_icon"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Heart Rate Records"
+                android:layout_marginStart="10dp"
+                android:textColor="#EF0909"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Patient Number:"
+                android:layout_marginStart="40dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/patient_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="20dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BPM Value:"
+                android:layout_marginStart="40dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/heart_rate_value"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status:"
+                android:layout_marginStart="40dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Not-Set"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Day:"
+                android:layout_marginStart="40dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Not Set"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date:"
+                android:layout_marginStart="40dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MM-DD-YYYY"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time:"
+                android:layout_marginStart="40dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

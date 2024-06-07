@@ -2,34 +2,36 @@ package com.itech.sleepwell
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.bumptech.glide.Glide
 
-class MainActivity : AppCompatActivity() {
-
-    private val splash_time: Long = 10000
+class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Find the ImageView and load the GIF file
-        val imageView = findViewById<ImageView>(R.id.img_logo)
-        Glide.with(this).load(R.drawable.sleep_icon).into(imageView)
+        val login : AppCompatButton = findViewById(R.id.login_bttn)
+        var signup = findViewById<TextView>(R.id.sign_up_bttn)
+        var forgot_pass = findViewById<TextView>(R.id.forgot_pass)
 
-        Handler().postDelayed({
-            startActivity(Intent(this, Login::class.java))
-            finish()
-        }, splash_time)
+        signup.setOnClickListener {
+            val intent = Intent (this, Signup::class.java)
+            startActivity(intent)
+        }
+
+        forgot_pass.setOnClickListener {
+            val intent = Intent (this, ForgotPassword::class.java)
+            startActivity(intent)
+        }
     }
 }
