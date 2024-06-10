@@ -52,4 +52,7 @@ dependencies {
 
     // Card View
     implementation("androidx.cardview:cardview:1.0.0")
+
+    // Password Toggle
+    implementation("com.google.android.material:material:1.9.0")
 }
