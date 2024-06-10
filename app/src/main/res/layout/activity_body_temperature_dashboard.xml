@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
+                android:contentDescription="Pillow Icon"
                 android:src="@drawable/pillow_sleep_icon"
                 android:layout_marginBottom="20dp"/>
 
@@ -35,7 +36,7 @@
                 app:cardElevation="8dp"
                 android:layout_margin="20dp"
                 app:cardCornerRadius="10dp"
-                android:background="f8f8f8">
+                android:background="#f8f8f8">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -53,7 +54,8 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:background="@drawable/body_temp_icon"
-                            android:layout_gravity="center"/>
+                            android:layout_gravity="center"
+                            android:contentDescription="Temperature Icon" />
 
                         <TextView
                             android:layout_width="wrap_content"
