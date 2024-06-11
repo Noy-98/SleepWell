@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.SleepWell" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.SleepWell" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">#00A5D1</item>
     </style>

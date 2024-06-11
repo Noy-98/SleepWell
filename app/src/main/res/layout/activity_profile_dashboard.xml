@@ -25,21 +25,22 @@
                 android:id="@+id/upload_bttn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="76dp"
+                android:layout_marginStart="196dp"
+                android:layout_marginTop="80dp"
                 android:backgroundTint="#00A5D1"
                 android:contentDescription="TODO"
                 android:src="@drawable/baseline_add_a_photo_24"
                 android:tintMode="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.594"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_pic"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/profile_pic"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginStart="152dp"
+                android:layout_marginStart="135dp"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/profile_icon"
                 app:layout_constraintStart_toStartOf="parent"
@@ -194,7 +195,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/signup_bttn"
+                    android:id="@+id/change_profile_bttn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:text="Submit"

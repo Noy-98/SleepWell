@@ -37,6 +37,7 @@
                 android:gravity="center">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/heart_monitoring"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     app:cardElevation="8dp"
@@ -78,6 +79,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/sweat_monitoring"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     app:cardElevation="8dp"
@@ -127,6 +129,7 @@
                 android:gravity="center">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/body_temp_monitoring"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     app:cardElevation="8dp"
@@ -168,6 +171,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/stress_level_monitoring"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     app:cardElevation="8dp"

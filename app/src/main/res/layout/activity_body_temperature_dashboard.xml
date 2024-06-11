@@ -77,8 +77,8 @@
                         android:gravity="center">
 
                         <TextView
-                            android:id="@+id/heart_rate_value"
-                            android:layout_width="50dp"
+                            android:id="@+id/body_temp_value"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textColor="#8BC34A"
@@ -113,8 +113,8 @@
                         android:gravity="center">
 
                         <TextView
-                            android:id="@+id/heart_rate_datestamp"
-                            android:layout_width="60dp"
+                            android:id="@+id/body_temp_timestamp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="HH:MM:SS"
@@ -128,23 +128,6 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:id="@+id/bottom_nav"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/bottom_background"
-        app:menu="@menu/bottom_nav_menu"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="20dp"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        app:itemRippleColor="@android:color/transparent"
-        android:foregroundGravity="center"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
