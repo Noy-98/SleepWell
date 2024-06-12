@@ -138,6 +138,17 @@ class ProfileDashboard : AppCompatActivity() {
     }
 
     private fun updateProfile() {
+        val firstName = findViewById<TextInputEditText>(R.id.first_name).text.toString().trim()
+        val lastName = findViewById<TextInputEditText>(R.id.last_name).text.toString().trim()
+        val mobileNum = findViewById<TextInputEditText>(R.id.mobile_number).text.toString().trim()
+        val password = findViewById<TextInputEditText>(R.id.password).text.toString().trim()
+        val confirmPassword = findViewById<TextInputEditText>(R.id.confirm_password).text.toString().trim()
+
+        if (firstName.isEmpty() && lastName.isEmpty() && mobileNum.isEmpty() && password.isEmpty() && confirmPassword.isEmpty()) {
+            Toast.makeText(this, "All fields are required to fill in", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
             val uid = currentUser.uid
@@ -155,36 +166,40 @@ class ProfileDashboard : AppCompatActivity() {
             }
 
             // Update other profile information
-            val firstName = findViewById<TextInputEditText>(R.id.first_name).text.toString()
-            val lastName = findViewById<TextInputEditText>(R.id.last_name).text.toString()
-            val mobileNum = findViewById<TextInputEditText>(R.id.mobile_number).text.toString()
-
-            usersReference.child("firstname").setValue(firstName)
-            usersReference.child("lastname").setValue(lastName)
-            usersReference.child("mobilenum").setValue(mobileNum)
+            if (firstName.isNotEmpty()) {
+                usersReference.child("firstname").setValue(firstName)
+            }
+            if (lastName.isNotEmpty()) {
+                usersReference.child("lastname").setValue(lastName)
+            }
+            if (mobileNum.isNotEmpty()) {
+                usersReference.child("mobilenum").setValue(mobileNum)
+            }
 
             // Update password
-            val password = findViewById<TextInputEditText>(R.id.password).text.toString()
-            val confirmPassword = findViewById<TextInputEditText>(R.id.confirm_password).text.toString()
-
-            if (password.isNotEmpty() && password.length >= 6) {
-                if (password == confirmPassword) {
-                    currentUser.updatePassword(password)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show()
-                            } else {
-                                Toast.makeText(this, "Failed to update password", Toast.LENGTH_SHORT).show()
+            if (password.isNotEmpty()) {
+                if (password.length >= 6) {
+                    if (password == confirmPassword) {
+                        currentUser.updatePassword(password)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    Toast.makeText(this, "Failed to update password", Toast.LENGTH_SHORT).show()
+                                }
                             }
-                        }
+                    } else {
+                        Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
-                    Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
                 }
-            } else if (password.isNotEmpty()) {
-                Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
 
     private fun openImagePicker() {
         val intent = Intent(Intent.ACTION_PICK)
