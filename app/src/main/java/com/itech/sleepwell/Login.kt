@@ -2,7 +2,9 @@ package com.itech.sleepwell
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -11,12 +13,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 
 class Login : AppCompatActivity() {
 
+    private val splash_time: Long = 10000
     private lateinit var auth: FirebaseAuth
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +32,14 @@ class Login : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // Find the ImageView and load the GIF file
+        val imageView = findViewById<ImageView>(R.id.img_logo)
+        Glide.with(this).load(R.drawable.nick_pillow).into(imageView)
+
+        Handler().postDelayed({
+        }, splash_time)
+
         // Initialize Firebase
         FirebaseApp.initializeApp(this)
         auth = FirebaseAuth.getInstance()

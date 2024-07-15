@@ -27,7 +27,7 @@
                 android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:contentDescription="Pillow Icon"
-                android:src="@drawable/pillow_sleep_icon"
+                android:src="@drawable/nick_pillow"
                 android:layout_marginBottom="20dp"/>
 
             <androidx.cardview.widget.CardView
@@ -53,7 +53,7 @@
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:background="@drawable/body_temp_icon"
+                            android:background="@drawable/baseline_device_thermostat_24"
                             android:layout_gravity="center"
                             android:contentDescription="Temperature Icon" />
 
@@ -62,7 +62,7 @@
                             android:layout_height="wrap_content"
                             android:text="Body Temperature"
                             android:layout_marginStart="10dp"
-                            android:textColor="#8BC34A"
+                            android:textColor="#5CABE9"
                             android:textStyle="bold"
                             android:textSize="25sp"
                             android:layout_gravity="center"/>
@@ -81,7 +81,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textColor="#8BC34A"
+                            android:textColor="#5CABE9"
                             android:textStyle="bold"
                             android:textSize="50sp"
                             android:gravity="center"/>

@@ -2,13 +2,16 @@ package com.itech.sleepwell
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -22,6 +25,7 @@ import java.util.UUID
 
 class HomeDashboard : AppCompatActivity() {
 
+    private val splash_time: Long = 10000
     private lateinit var database: FirebaseDatabase
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +38,13 @@ class HomeDashboard : AppCompatActivity() {
             insets
         }
 
+        // Find the ImageView and load the GIF file
+        val imageView = findViewById<ImageView>(R.id.img_logo)
+        Glide.with(this).load(R.drawable.nick_pillow).into(imageView)
+
+        Handler().postDelayed({
+        }, splash_time)
+
         // Initialize Firebase
         auth = FirebaseAuth.getInstance()
         database = Firebase.database
@@ -44,8 +55,9 @@ class HomeDashboard : AppCompatActivity() {
             if (item.itemId == R.id.home) {
                 return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.connect) {
-                connectDevice()
-                true
+                startActivity(Intent(applicationContext, BluetoothDashboard::class.java))
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.profile) {
                 startActivity(Intent(applicationContext, ProfileDashboard::class.java))
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -61,67 +73,21 @@ class HomeDashboard : AppCompatActivity() {
             false
         }
 
-        val Heart_Monitoring = findViewById<CardView>(R.id.heart_monitoring)
-        val Sweat_Monitoring = findViewById<CardView>(R.id.sweat_monitoring)
+        val music = findViewById<CardView>(R.id.music)
+        val massage_control = findViewById<CardView>(R.id.massage_control)
         val Body_Temp_Monitoring = findViewById<CardView>(R.id.body_temp_monitoring)
-        val Stress_Level_Monitoring = findViewById<CardView>(R.id.stress_level_monitoring)
 
-        Heart_Monitoring.setOnClickListener {
-            val intent = Intent (this, HeartDashboard::class.java)
+        music.setOnClickListener {
+            val intent = Intent (this, MusicDashboard::class.java)
             startActivity(intent)
         }
-        Sweat_Monitoring.setOnClickListener {
-            val intent = Intent(this, SweatDashboard::class.java)
+        massage_control.setOnClickListener {
+            val intent = Intent(this, MassageControlDashboard::class.java)
             startActivity(intent)
         }
         Body_Temp_Monitoring.setOnClickListener {
             val intent = Intent(this, BodyTemperatureDashboard::class.java)
             startActivity(intent)
-        }
-        Stress_Level_Monitoring.setOnClickListener {
-            val intent = Intent(this, StressLevelDashboard::class.java)
-            startActivity(intent)
-        }
-    }
-
-    private fun connectDevice() {
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            val uid = currentUser.uid
-
-            val deviceRef = database.getReference("SleepWellDevice")
-            deviceRef.orderByChild("uid").equalTo(uid).addListenerForSingleValueEvent(object :
-                ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        Toast.makeText(this@HomeDashboard, "You are already connected to your device", Toast.LENGTH_SHORT).show()
-                    } else {
-                        val deviceId = deviceRef.push().key ?: return
-                        val deviceData = mapOf(
-                            "id" to deviceId,
-                            "uid" to uid,
-                            "heartRateData" to "",
-                            "sweatLevelData" to "",
-                            "bodyTempData" to "",
-                            "timestamp" to System.currentTimeMillis()
-                        )
-
-                        deviceRef.child(deviceId).setValue(deviceData).addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                Toast.makeText(this@HomeDashboard, "Connected Successfully", Toast.LENGTH_SHORT).show()
-                            } else {
-                                Toast.makeText(this@HomeDashboard, "Failed to connect device: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                    Toast.makeText(this@HomeDashboard, "Database error: ${databaseError.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
-        } else {
-            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show()
         }
     }
 }

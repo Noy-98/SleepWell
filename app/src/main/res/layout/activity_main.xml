@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/sleep_icon"
+        android:src="@drawable/nick_pillow"
         android:id="@+id/img_logo"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

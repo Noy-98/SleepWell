@@ -26,9 +26,10 @@
         android:background="@drawable/backgroud_color">
 
         <ImageView
+            android:id="@+id/img_logo"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/pillow_sleep_icon"
+            android:src="@drawable/nick_pillow"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"/>
 

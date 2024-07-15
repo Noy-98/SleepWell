@@ -23,10 +23,11 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/img_logo"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:src="@drawable/pillow_sleep_icon"
+                android:src="@drawable/nick_pillow"
                 android:layout_marginBottom="20dp"/>
 
             <LinearLayout
@@ -37,7 +38,7 @@
                 android:gravity="center">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/heart_monitoring"
+                    android:id="@+id/music"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     app:cardElevation="8dp"
@@ -56,19 +57,12 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/heart_icon"/>
+                            android:src="@drawable/baseline_music_note_24"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Heart"
-                            android:textSize="15sp"
-                            android:textColor="@color/black"
-                            android:gravity="center"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Monitoring"
+                            android:text="Music"
                             android:textSize="15sp"
                             android:textColor="@color/black"
                             android:gravity="center"/>
@@ -79,7 +73,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/sweat_monitoring"
+                    android:id="@+id/massage_control"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     app:cardElevation="8dp"
@@ -98,19 +92,19 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/sweat_icon"/>
+                            android:src="@drawable/baseline_control_point_24"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Sweat"
+                            android:text="Massage"
                             android:textSize="15sp"
                             android:textColor="@color/black"
                             android:gravity="center"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Monitoring"
+                            android:text="Control"
                             android:textSize="15sp"
                             android:textColor="@color/black"
                             android:gravity="center"/>
@@ -148,54 +142,12 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/body_temp_icon"/>
+                            android:src="@drawable/baseline_device_thermostat_24"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Body Temperature"
-                            android:textSize="15sp"
-                            android:textColor="@color/black"
-                            android:gravity="center"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Monitoring"
-                            android:textSize="15sp"
-                            android:textColor="@color/black"
-                            android:gravity="center"/>
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/stress_level_monitoring"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    app:cardElevation="8dp"
-                    android:layout_margin="20dp"
-                    app:cardCornerRadius="10dp"
-                    android:background="#f8f8f8">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_gravity="center">
-
-                        <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/stress_level_icon"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Stress Level"
                             android:textSize="15sp"
                             android:textColor="@color/black"
                             android:gravity="center"/>
