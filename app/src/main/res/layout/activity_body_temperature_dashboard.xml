@@ -5,17 +5,17 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BodyTemperatureDashboard"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".BodyTemperatureDashboard">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="140dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="140dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,17 +26,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:contentDescription="Pillow Icon"
+                android:layout_marginBottom="20dp"
                 android:src="@drawable/nick_pillow"
-                android:layout_marginBottom="20dp"/>
+                tools:ignore="ContentDescription" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                app:cardElevation="8dp"
                 android:layout_margin="20dp"
+                android:background="#f8f8f8"
                 app:cardCornerRadius="10dp"
-                android:background="#f8f8f8">
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -47,79 +47,80 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
                         android:orientation="horizontal"
-                        android:layout_margin="20dp">
+                        tools:ignore="UseCompoundDrawables">
 
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:background="@drawable/baseline_device_thermostat_24"
                             android:layout_gravity="center"
-                            android:contentDescription="Temperature Icon" />
+                            android:background="@drawable/baseline_device_thermostat_24"
+                            tools:ignore="ContentDescription" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Body Temperature"
+                            android:layout_gravity="center"
                             android:layout_marginStart="10dp"
+                            android:text="@string/body_temperature"
                             android:textColor="#5CABE9"
-                            android:textStyle="bold"
                             android:textSize="25sp"
-                            android:layout_gravity="center"/>
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginTop="5dp"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/body_temp_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:gravity="center"
+                            android:text="@string/_0"
                             android:textColor="#5CABE9"
-                            android:textStyle="bold"
                             android:textSize="50sp"
-                            android:gravity="center"/>
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginTop="5dp"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Temperature in °C"
-                            android:textStyle="bold"
+                            android:text="@string/temperature_in_c"
+                            android:textColor="@color/black"
                             android:textSize="20sp"
-                            android:textColor="@color/black"/>
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginTop="5dp"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/body_temp_timestamp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="HH:MM:SS"
+                            android:text="@string/hh_mm_ss"
                             android:textColor="@color/black"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp" />
 
                     </LinearLayout>
 
@@ -133,11 +134,11 @@
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:indeterminateTint="#00A4D0"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

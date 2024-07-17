@@ -5,17 +5,18 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="#2F5988">
+    android:background="#2F5988"
+    tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/img_logo"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:src="@drawable/nick_pillow_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/nick_pillow_icon"
-        android:id="@+id/img_logo"/>
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
