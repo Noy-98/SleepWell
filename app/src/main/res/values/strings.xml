@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SleepWell</string>
+    <string name="home">HOME</string>
+    <string name="connect">CONNECT</string>
+    <string name="profile">PROFILE</string>
+    <string name="logout">LOGOUT</string>
 </resources>

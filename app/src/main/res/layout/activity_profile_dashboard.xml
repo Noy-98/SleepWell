@@ -8,55 +8,72 @@
     tools:context=".ProfileDashboard"
     android:background="@color/white">
 
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/top_background"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_alignParentTop="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp">
+            android:orientation="vertical">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/upload_bttn"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="196dp"
-                android:layout_marginTop="80dp"
-                android:backgroundTint="#00A5D1"
-                android:contentDescription="TODO"
-                android:src="@drawable/baseline_add_a_photo_24"
-                android:tintMode="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/profile_pic"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                android:layout_gravity="center">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/profile_pic"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="135dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/profile_icon"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/circular"
-                app:strokeColor="#00A5D1"
-                app:strokeWidth="1dp" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/upload_bttn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="80dp"
+                    android:backgroundTint="#00A5D1"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/baseline_add_a_photo_24"
+                    android:tintMode="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/profile_pic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profile_pic"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/profile_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/circular"
+                    app:strokeColor="#00A5D1"
+                    app:strokeWidth="1dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@+id/upload_bttn"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="5dp">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/upload_bttn">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -72,10 +89,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/text_box_effect2"
+                        android:hint="First Name"
                         android:padding="0dp"
                         android:textColor="#000000"
-                        android:hint="First Name"
-                        android:textColorHint="#68000000"/>
+                        android:textColorHint="#68000000" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,10 +110,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/text_box_effect2"
-                        android:textColor="#000000"
-                        android:padding="0dp"
                         android:hint="Last Name"
-                        android:textColorHint="#68000000"/>
+                        android:padding="0dp"
+                        android:textColor="#000000"
+                        android:textColorHint="#68000000" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,10 +131,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/text_box_effect2"
-                        android:textColor="#000000"
-                        android:padding="0dp"
                         android:hint="Mobile Number"
-                        android:textColorHint="#68000000"/>
+                        android:padding="0dp"
+                        android:textColor="#000000"
+                        android:textColorHint="#68000000" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,21 +153,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/text_box_effect2"
-                        android:textColor="#000000"
-                        android:padding="0dp"
                         android:hint="Email"
-                        android:textColorHint="#68000000"/>
+                        android:padding="0dp"
+                        android:textColor="#000000"
+                        android:textColorHint="#68000000" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_layout"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
                     app:boxBackgroundMode="none"
-                    android:id="@+id/password_layout"
                     app:hintEnabled="false"
                     app:passwordToggleEnabled="true"
                     app:passwordToggleTint="#00A4D0">
@@ -160,22 +177,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/text_box_effect2"
-                        android:inputType="textPassword"
-                        android:textColor="#000000"
-                        android:padding="0dp"
                         android:hint="New Password"
-                        android:textColorHint="#68000000"/>
+                        android:inputType="textPassword"
+                        android:padding="0dp"
+                        android:textColor="#000000"
+                        android:textColorHint="#68000000" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_layout_2"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
                     app:boxBackgroundMode="none"
-                    android:id="@+id/password_layout_2"
                     app:hintEnabled="false"
                     app:passwordToggleEnabled="true"
                     app:passwordToggleTint="#00A4D0">
@@ -185,11 +202,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/text_box_effect2"
-                        android:inputType="textPassword"
-                        android:textColor="#000000"
-                        android:padding="0dp"
                         android:hint="Confirm Password"
-                        android:textColorHint="#68000000"/>
+                        android:inputType="textPassword"
+                        android:padding="0dp"
+                        android:textColor="#000000"
+                        android:textColorHint="#68000000" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -198,47 +215,43 @@
                     android:id="@+id/change_profile_bttn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:text="Submit"
                     android:layout_marginStart="50dp"
-                    android:layout_marginEnd="50dp"
                     android:layout_marginTop="50dp"
-                    android:textSize="18sp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="50dp"
                     android:background="@drawable/ripple_effect"
+                    android:text="Submit"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
-                    android:layout_marginBottom="200dp"/>
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:id="@+id/bottom_nav"
+        android:background="@drawable/bottom_background"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/white"
+        app:menu="@menu/bottom_nav_menu"
+        android:paddingTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/bottom_background"
-        app:menu="@menu/bottom_nav_menu"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="20dp"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        app:itemRippleColor="@android:color/transparent"
-        android:foregroundGravity="center"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:indeterminateTint="#00A4D0"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

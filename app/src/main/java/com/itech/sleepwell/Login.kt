@@ -81,7 +81,7 @@ class Login : AppCompatActivity() {
                         if (user != null) {
                             if(user.isEmailVerified){
                                 ProgressBar.visibility = View.GONE
-                                val intent = Intent(this, HomeDashboard::class.java)
+                                val intent = Intent(this, LoadingScreen::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(intent)
                                 Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show()

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.SleepWell"
         tools:targetApi="31">
         <activity
+            android:name=".LoadingScreen"
+            android:exported="false" />
+        <activity
             android:name=".BluetoothDashboard"
             android:exported="false" />
         <activity

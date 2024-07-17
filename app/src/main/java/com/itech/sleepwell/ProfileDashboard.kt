@@ -70,8 +70,9 @@ class ProfileDashboard : AppCompatActivity() {
                 finish()
                 return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.connect) {
-                connectDevice()
-                true
+                startActivity(Intent(applicationContext, BluetoothDashboard::class.java))
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.profile) {
                 return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.logout) {
@@ -94,47 +95,6 @@ class ProfileDashboard : AppCompatActivity() {
         }
 
         loadUsersProfile()
-    }
-
-    private fun connectDevice() {
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            val uid = currentUser.uid
-
-            val deviceRef = databaseReference.getReference("SleepWellDevice")
-            deviceRef.orderByChild("uid").equalTo(uid).addListenerForSingleValueEvent(object :
-                ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        Toast.makeText(this@ProfileDashboard, "You are already connected to your device", Toast.LENGTH_SHORT).show()
-                    } else {
-                        val deviceId = deviceRef.push().key ?: return
-                        val deviceData = mapOf(
-                            "id" to deviceId,
-                            "uid" to uid,
-                            "heartRateData" to "",
-                            "sweatLevelData" to "",
-                            "bodyTempData" to "",
-                            "timestamp" to System.currentTimeMillis()
-                        )
-
-                        deviceRef.child(deviceId).setValue(deviceData).addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                Toast.makeText(this@ProfileDashboard, "Connected Successfully", Toast.LENGTH_SHORT).show()
-                            } else {
-                                Toast.makeText(this@ProfileDashboard, "Failed to connect device: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                    Toast.makeText(this@ProfileDashboard, "Database error: ${databaseError.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
-        } else {
-            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun updateProfile() {

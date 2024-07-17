@@ -51,12 +51,15 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     // Glide dependency
-    implementation("com.github.bumptech.glide:glide:4.13.2")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.13.2")
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 
     // Card View
-    implementation("androidx.cardview:cardview:1.0.0")
+    implementation(libs.androidx.cardview)
 
     // Password Toggle
-    implementation("com.google.android.material:material:1.9.0")
+    implementation(libs.material)
+
+    //Ripple Effect
+    implementation(libs.library)
 }
