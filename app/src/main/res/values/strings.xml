@@ -30,4 +30,6 @@
     <string name="new_password">New Password</string>
     <string name="submit">Submit</string>
     <string name="todo">TODO</string>
+    <string name="devices">Devices</string>
+    <string name="help">HELP</string>
 </resources>

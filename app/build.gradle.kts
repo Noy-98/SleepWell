@@ -18,6 +18,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -61,5 +65,5 @@ dependencies {
     implementation(libs.material)
 
     //Ripple Effect
-    implementation(libs.library)
+    implementation("com.skyfishjy.ripplebackground:library:1.0.1")
 }

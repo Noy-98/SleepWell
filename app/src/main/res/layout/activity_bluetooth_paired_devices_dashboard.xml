@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".BluetoothDashboard">
+    tools:context=".BluetoothPairedDevicesDashboard"
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bluetooth"
+            android:text="Paired Devices"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,61 +31,13 @@
             android:textAllCaps="true"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.skyfishjy.library.RippleBackground
-        android:id="@+id/bluetooth_ripple"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header"
-        app:rb_color="#00A4D0"
-        app:rb_duration="3000"
-        app:rb_radius="42dp"
-        app:rb_rippleAmount="4"
-        app:rb_scale="4">
-        
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/bluetooth_icon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/bluetooth_icon" />
-
-    </com.skyfishjy.library.RippleBackground>
-
-    <LinearLayout
-        android:id="@+id/middle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/middle_background"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bluetooth_ripple">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/devices"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_arrow_drop_down_24"
-            tools:ignore="ContentDescription" />
-    </LinearLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/middle"
+        app:layout_constraintTop_toBottomOf="@+id/header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -96,7 +48,7 @@
                 android:id="@+id/musicList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/bluetooth_item"/>
+                tools:listitem="@layout/bluetooth_paired_item"/>
         </LinearLayout>
 
     </ScrollView>
