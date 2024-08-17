@@ -75,6 +75,11 @@ class ProfileDashboard : AppCompatActivity() {
                 return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.profile) {
                 return@setOnItemSelectedListener true
+            } else if (item.itemId == R.id.updates) {
+                startActivity(Intent(applicationContext, UpdatesDashboard::class.java))
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                finish()
+                return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.logout) {
                 startActivity(Intent(applicationContext, Login::class.java))
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

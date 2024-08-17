@@ -15,14 +15,14 @@
         android:layout_margin="10dp">
 
         <LinearLayout
-            android:layout_width="290dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center_vertical"
             android:gravity="center">
 
             <TextView
-                android:id="@+id/music_name"
+                android:id="@+id/bluetooth_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Bluetooth Name"
@@ -36,10 +36,10 @@
                 android:gravity="start"/>
 
             <TextView
-                android:id="@+id/singer"
+                android:id="@+id/status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="<status>"
+                android:text="@string/status"
                 android:textAllCaps="true"
                 android:textColor="#00A4D0"
                 android:textSize="10sp"
@@ -53,13 +53,14 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/connect_bttn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="50dp"
             android:layout_marginEnd="5dp"
-            android:src="@drawable/baseline_arrow_forward_ios_24"/>
+            android:src="@drawable/baseline_bluetooth_connected_24"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

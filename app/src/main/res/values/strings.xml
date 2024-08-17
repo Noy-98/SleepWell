@@ -31,5 +31,7 @@
     <string name="submit">Submit</string>
     <string name="todo">TODO</string>
     <string name="devices">Devices</string>
-    <string name="help">HELP</string>
+    <string name="updates">UPDATES</string>
+    <string name="unknown"><![CDATA[<unknown>]]></string>
+    <string name="status"><![CDATA[<status>]]></string>
 </resources>

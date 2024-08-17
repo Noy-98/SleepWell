@@ -23,6 +23,7 @@ class Login : AppCompatActivity() {
     private val splash_time: Long = 10000
     private lateinit var auth: FirebaseAuth
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

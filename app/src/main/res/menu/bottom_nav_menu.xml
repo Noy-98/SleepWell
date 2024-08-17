@@ -15,9 +15,9 @@
         android:icon="@drawable/baseline_person_24"
         android:title="@string/profile"/>
     <item
-        android:id="@+id/help"
+        android:id="@+id/updates"
         android:icon="@drawable/baseline_info_24"
-        android:title="@string/help"/>
+        android:title="@string/updates"/>
     <item
         android:id="@+id/logout"
         android:icon="@drawable/baseline_logout_24"

@@ -34,7 +34,7 @@
     <com.skyfishjy.library.RippleBackground
         android:id="@+id/bluetooth_ripple"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header"
@@ -43,7 +43,7 @@
         app:rb_radius="42dp"
         app:rb_rippleAmount="4"
         app:rb_scale="4">
-        
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/bluetooth_icon"
             android:layout_width="100dp"
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@string/devices"
+            android:text="Available Devices"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -80,23 +80,36 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/middle"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="5dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/middle">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/musicList"
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/bluetooth_item"/>
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:text="No nearby Not Paired Bluetooth Devices were found."
+                android:layout_marginTop="20dp"
+                android:visibility="gone"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/bluetoothList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="250dp"
+                tools:listitem="@layout/bluetooth_item" />
         </LinearLayout>
 
     </ScrollView>

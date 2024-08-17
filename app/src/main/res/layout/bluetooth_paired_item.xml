@@ -39,7 +39,7 @@
                 android:id="@+id/singer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="<status>"
+                android:text="@string/status"
                 android:textAllCaps="true"
                 android:textColor="#00A4D0"
                 android:textSize="10sp"

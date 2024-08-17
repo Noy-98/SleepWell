@@ -59,7 +59,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:gravity="center"
-            android:text="<unknown>"
+            android:text="@string/unknown"
             android:textColor="#00A4D0"
             android:textSize="10sp" />
 

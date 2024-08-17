@@ -34,6 +34,38 @@ class BodyTemperatureDashboard : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavigationView.selectedItemId = R.id.home
+        bottomNavigationView.setOnItemSelectedListener { item: MenuItem ->
+            if (item.itemId == R.id.home) {
+                startActivity(Intent(applicationContext, HomeDashboard::class.java))
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                return@setOnItemSelectedListener true
+            } else if (item.itemId == R.id.connect) {
+                startActivity(Intent(applicationContext, BluetoothDashboard::class.java))
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                return@setOnItemSelectedListener true
+            } else if (item.itemId == R.id.profile) {
+                startActivity(Intent(applicationContext, ProfileDashboard::class.java))
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                finish()
+                return@setOnItemSelectedListener true
+            } else if (item.itemId == R.id.updates) {
+                startActivity(Intent(applicationContext, UpdatesDashboard::class.java))
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                finish()
+                return@setOnItemSelectedListener true
+            } else if (item.itemId == R.id.logout) {
+                startActivity(Intent(applicationContext, Login::class.java))
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                finish()
+                return@setOnItemSelectedListener true
+            }
+            false
+        }
+
         // Initialize Firebase
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
