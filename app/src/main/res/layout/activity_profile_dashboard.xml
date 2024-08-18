@@ -153,26 +153,27 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-                <com.google.android.material.textfield.TextInputLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
+                    android:orientation="vertical"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="20dp"
-                    app:boxBackgroundMode="none"
-                    app:hintEnabled="false">
+                    android:background="@drawable/text_box_effect2">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <TextView
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/text_box_effect2"
-                        android:hint="@string/email"
-                        android:padding="0dp"
                         android:textColor="#000000"
-                        android:textColorHint="#68000000" />
-
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:text="@string/email"
+                        android:padding="5dp"
+                        android:textSize="15sp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_margin="10dp"/>
+                </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/password_layout"

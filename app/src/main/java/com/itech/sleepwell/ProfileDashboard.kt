@@ -109,7 +109,7 @@ class ProfileDashboard : AppCompatActivity() {
         val password = findViewById<TextInputEditText>(R.id.password).text.toString().trim()
         val confirmPassword = findViewById<TextInputEditText>(R.id.confirm_password).text.toString().trim()
 
-        if (firstName.isEmpty() && lastName.isEmpty() && mobileNum.isEmpty() && password.isEmpty() && confirmPassword.isEmpty()) {
+        if (firstName.isEmpty() || lastName.isEmpty() || mobileNum.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             Toast.makeText(this, "All fields are required to fill in", Toast.LENGTH_SHORT).show()
             return
         }
@@ -119,35 +119,31 @@ class ProfileDashboard : AppCompatActivity() {
             val uid = currentUser.uid
             val usersReference = databaseReference.getReference("Users/$uid")
 
-            // Update profile picture
-            if (::imageUri.isInitialized) {
-                val imageRef = storageReference.child("images/$uid/${imageUri.lastPathSegment}")
-                imageRef.putFile(imageUri)
-                    .addOnSuccessListener { taskSnapshot: UploadTask.TaskSnapshot ->
-                        imageRef.downloadUrl.addOnSuccessListener { uri: Uri ->
-                            usersReference.child("imageUrl").setValue(uri.toString())
-                        }
-                    }
-            }
-
-            // Update other profile information
-            if (firstName.isNotEmpty()) {
-                usersReference.child("firstname").setValue(firstName)
-            }
-            if (lastName.isNotEmpty()) {
-                usersReference.child("lastname").setValue(lastName)
-            }
-            if (mobileNum.isNotEmpty()) {
-                usersReference.child("mobilenum").setValue(mobileNum)
-            }
-
             // Update password
-            if (password.isNotEmpty()) {
                 if (password.length >= 6) {
                     if (password == confirmPassword) {
+
+                        // Update profile picture
+                        if (::imageUri.isInitialized) {
+                            val imageRef = storageReference.child("images/$uid/${imageUri.lastPathSegment}")
+                            imageRef.putFile(imageUri)
+                                .addOnSuccessListener { taskSnapshot: UploadTask.TaskSnapshot ->
+                                    imageRef.downloadUrl.addOnSuccessListener { uri: Uri ->
+                                        usersReference.child("imageUrl").setValue(uri.toString())
+                                    }
+                                }
+                        }
+
+                        // Update other profile information
+                        usersReference.child("firstname").setValue(firstName)
+                        usersReference.child("lastname").setValue(lastName)
+                        usersReference.child("mobilenum").setValue(mobileNum)
+
                         currentUser.updatePassword(password)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
+                                    val intent = Intent(this, HomeDashboard::class.java)
+                                    startActivity(intent)
                                     Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show()
                                 } else {
                                     Toast.makeText(this, "Failed to update password", Toast.LENGTH_SHORT).show()
@@ -159,9 +155,6 @@ class ProfileDashboard : AppCompatActivity() {
                 } else {
                     Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show()
-            }
         }
     }
 
@@ -189,7 +182,6 @@ class ProfileDashboard : AppCompatActivity() {
                                 .load(users.imageUrl)
                                 .into(profileImageView)
 
-                            // Set the text views with the doctor's information
                             findViewById<TextView>(R.id.first_name).text = users.firstname
                             findViewById<TextView>(R.id.last_name).text = users.lastname
                             findViewById<TextView>(R.id.mobile_number).text = users.mobilenum
