@@ -75,15 +75,16 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="vertical"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:id="@+id/music_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:src="@drawable/baseline_music_note2_24"
                     tools:ignore="ContentDescription" />
@@ -103,6 +104,7 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00:00"
@@ -113,6 +115,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/total_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00:00"
@@ -126,18 +129,26 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            android:progress="20" />
+            android:progress="0" />
+
+        <ImageView
+            android:id="@+id/music_control"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_repeat_24"
+            android:layout_marginTop="10dp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:gravity="center">
 
@@ -145,7 +156,7 @@
                 android:id="@+id/prev"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="80dp"
+                android:layout_marginStart="50dp"
                 android:src="@drawable/baseline_fast_rewind_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -159,13 +170,15 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/next"
                 app:layout_constraintStart_toEndOf="@+id/prev"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"/>
 
             <ImageView
                 android:id="@+id/next"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="80dp"
+                android:layout_marginEnd="50dp"
                 android:src="@drawable/baseline_fast_forward_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
