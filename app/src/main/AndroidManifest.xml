@@ -4,6 +4,9 @@
 
 
     <!-- Bluetooth Permissions -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
@@ -44,6 +47,9 @@
             android:exported="false" />
         <activity
             android:name=".MusicDashboard"
+            android:exported="false" />
+        <activity
+            android:name=".BodyTemperatureDashboard"
             android:exported="false" />
         <activity
             android:name=".ProfileDashboard"

@@ -22,6 +22,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class MusicDashboard : AppCompatActivity() {
 
@@ -65,38 +66,32 @@ class MusicDashboard : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView.selectedItemId = R.id.home
         bottomNavigationView.setOnItemSelectedListener { item: MenuItem ->
-            when (item.itemId) {
-                R.id.home -> {
-                    startActivity(Intent(applicationContext, HomeDashboard::class.java))
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                    true
-                }
-                R.id.connect -> {
-                    startActivity(Intent(applicationContext, BluetoothDashboard::class.java))
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                    true
-                }
-                R.id.profile -> {
-                    startActivity(Intent(applicationContext, ProfileDashboard::class.java))
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                    finish()
-                    true
-                }
-                R.id.updates -> {
-                    startActivity(Intent(applicationContext, UpdatesDashboard::class.java))
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                    finish()
-                    true
-                }
-                R.id.logout -> {
-                    startActivity(Intent(applicationContext, Login::class.java))
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                    finish()
-                    true
-                }
-                else -> false
+            if (item.itemId == R.id.home) {
+                startActivity(Intent(applicationContext, HomeDashboard::class.java))
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                return@setOnItemSelectedListener true
+            } else if (item.itemId == R.id.connect) {
+                startActivity(Intent(applicationContext, BluetoothDashboard::class.java))
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                return@setOnItemSelectedListener true
+            } else if (item.itemId == R.id.profile) {
+                startActivity(Intent(applicationContext, ProfileDashboard::class.java))
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                finish()
+                return@setOnItemSelectedListener true
+            } else if (item.itemId == R.id.updates) {
+                startActivity(Intent(applicationContext, UpdatesDashboard::class.java))
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                finish()
+                return@setOnItemSelectedListener true
+            } else if (item.itemId == R.id.logout) {
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(this, Login::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                return@setOnItemSelectedListener true
             }
+            false
         }
 
         musicList = findViewById(R.id.musicList)

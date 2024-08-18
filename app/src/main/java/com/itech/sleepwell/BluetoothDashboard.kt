@@ -15,6 +15,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -23,6 +24,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.skyfishjy.library.RippleBackground
 
 class BluetoothDashboard : AppCompatActivity() {
@@ -33,7 +35,6 @@ class BluetoothDashboard : AppCompatActivity() {
     private val bluetoothDevices = mutableListOf<BluetoothDevice>()
     private lateinit var textView: TextView
     private lateinit var rippleBackground: RippleBackground
-    private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,10 +81,10 @@ class BluetoothDashboard : AppCompatActivity() {
                 finish()
                 return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.logout) {
-                startActivity(Intent(applicationContext, Login::class.java))
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(this, Login::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                finish()
+                startActivity(intent)
                 return@setOnItemSelectedListener true
             }
             false
@@ -131,25 +132,41 @@ class BluetoothDashboard : AppCompatActivity() {
 
     private fun initializeBluetooth() {
         if (!bluetoothAdapter.isEnabled) {
-            val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.BLUETOOTH_CONNECT
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return
-            }
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
+            showBluetoothEnableDialog()
         } else {
             setupBluetoothList()
         }
+    }
+
+    private fun showBluetoothEnableDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Enable Bluetooth")
+            .setMessage("Bluetooth is not enabled. Please enable Bluetooth to use the app.")
+            .setPositiveButton("Enable") { _, _ ->
+                val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+                if (ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.BLUETOOTH_CONNECT
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return@setPositiveButton
+                }
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
+            }
+            .setNegativeButton("Deny") { _, _ ->
+                val intent = Intent (this, HomeDashboard::class.java)
+                startActivity(intent)
+                Toast.makeText(this, "Bluetooth permission is required to proceed", Toast.LENGTH_SHORT).show()
+            }
+            .setCancelable(false)
+            .show()
     }
 
     private fun setupBluetoothList() {

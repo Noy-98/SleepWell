@@ -69,10 +69,10 @@ class HomeDashboard : AppCompatActivity() {
                 finish()
                 return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.logout) {
-                startActivity(Intent(applicationContext, Login::class.java))
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(this, Login::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                finish()
+                startActivity(intent)
                 return@setOnItemSelectedListener true
             }
             false

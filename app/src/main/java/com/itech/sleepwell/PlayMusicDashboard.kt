@@ -18,6 +18,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.progressindicator.LinearProgressIndicator
+import com.google.firebase.auth.FirebaseAuth
 import java.io.ByteArrayInputStream
 import kotlin.random.Random
 
@@ -91,10 +92,10 @@ class PlayMusicDashboard : AppCompatActivity() {
                 finish()
                 return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.logout) {
-                startActivity(Intent(applicationContext, Login::class.java))
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(this, Login::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                finish()
+                startActivity(intent)
                 return@setOnItemSelectedListener true
             }
             false
