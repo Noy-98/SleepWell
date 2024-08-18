@@ -74,19 +74,31 @@ class PlayMusicDashboard : AppCompatActivity() {
         bottomNavigationView.selectedItemId = R.id.home
         bottomNavigationView.setOnItemSelectedListener { item: MenuItem ->
             if (item.itemId == R.id.home) {
+                mediaPlayer?.pause()
+                isPlaying = false
+
                 startActivity(Intent(applicationContext, HomeDashboard::class.java))
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.connect) {
+                mediaPlayer?.pause()
+                isPlaying = false
+
                 startActivity(Intent(applicationContext, BluetoothDashboard::class.java))
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.profile) {
+                mediaPlayer?.pause()
+                isPlaying = false
+
                 startActivity(Intent(applicationContext, ProfileDashboard::class.java))
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 finish()
                 return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.updates) {
+                mediaPlayer?.pause()
+                isPlaying = false
+
                 startActivity(Intent(applicationContext, UpdatesDashboard::class.java))
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 finish()

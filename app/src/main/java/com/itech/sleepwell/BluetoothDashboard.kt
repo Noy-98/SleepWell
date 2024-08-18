@@ -35,6 +35,7 @@ class BluetoothDashboard : AppCompatActivity() {
     private val bluetoothDevices = mutableListOf<BluetoothDevice>()
     private lateinit var textView: TextView
     private lateinit var rippleBackground: RippleBackground
+    private var isReceiverRegistered = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -161,8 +162,8 @@ class BluetoothDashboard : AppCompatActivity() {
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
             }
             .setNegativeButton("Deny") { _, _ ->
-                val intent = Intent (this, HomeDashboard::class.java)
-                startActivity(intent)
+                startActivity(Intent(applicationContext, HomeDashboard::class.java))
+                finish()
                 Toast.makeText(this, "Bluetooth permission is required to proceed", Toast.LENGTH_SHORT).show()
             }
             .setCancelable(false)
@@ -198,9 +199,11 @@ class BluetoothDashboard : AppCompatActivity() {
         // Register for broadcasts when a device is discovered
         val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
         registerReceiver(bluetoothReceiver, filter)
+        isReceiverRegistered = true
 
         val finishFilter = IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
         registerReceiver(bluetoothReceiver, finishFilter)
+        isReceiverRegistered = true
     }
 
     private val bluetoothReceiver = object : BroadcastReceiver() {
@@ -252,7 +255,10 @@ class BluetoothDashboard : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(bluetoothReceiver)
+        if (isReceiverRegistered) {
+            unregisterReceiver(bluetoothReceiver)
+            isReceiverRegistered = false
+        }
     }
 
     companion object {

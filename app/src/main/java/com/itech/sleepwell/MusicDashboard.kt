@@ -67,28 +67,49 @@ class MusicDashboard : AppCompatActivity() {
         bottomNavigationView.selectedItemId = R.id.home
         bottomNavigationView.setOnItemSelectedListener { item: MenuItem ->
             if (item.itemId == R.id.home) {
+                if (::adapter.isInitialized) {
+                    adapter.pauseMusicOnDashboard()
+                }
+
                 startActivity(Intent(applicationContext, HomeDashboard::class.java))
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.connect) {
+                if (::adapter.isInitialized) {
+                    adapter.pauseMusicOnDashboard()
+                }
+
                 startActivity(Intent(applicationContext, BluetoothDashboard::class.java))
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.profile) {
+                if (::adapter.isInitialized) {
+                    adapter.pauseMusicOnDashboard()
+                }
+
                 startActivity(Intent(applicationContext, ProfileDashboard::class.java))
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 finish()
                 return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.updates) {
+                if (::adapter.isInitialized) {
+                    adapter.pauseMusicOnDashboard()
+                }
+
                 startActivity(Intent(applicationContext, UpdatesDashboard::class.java))
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 finish()
                 return@setOnItemSelectedListener true
             } else if (item.itemId == R.id.logout) {
+                if (::adapter.isInitialized) {
+                    adapter.stopMusicOnLogout() // Stop the music before logging out
+                }
+
                 FirebaseAuth.getInstance().signOut()
                 val intent = Intent(this, Login::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
+                finish()
                 return@setOnItemSelectedListener true
             }
             false

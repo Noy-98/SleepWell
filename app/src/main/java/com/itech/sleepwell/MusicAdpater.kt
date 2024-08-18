@@ -84,6 +84,14 @@ class MusicAdapter(
         notifyDataSetChanged()
     }
 
+    fun pauseMusicOnDashboard() {
+        pauseMusic() // Call the existing stopMusic method
+    }
+
+    fun stopMusicOnLogout() {
+        stopMusic() // Call the existing stopMusic method
+    }
+
     inner class MusicViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val musicName: TextView = view.findViewById(R.id.music_name)
         val singer: TextView = view.findViewById(R.id.singer)
