@@ -45,6 +45,18 @@ class Login : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
         auth = FirebaseAuth.getInstance()
 
+        // Check if the user is already logged in
+        val currentUser = auth.currentUser
+        if (currentUser != null && currentUser.isEmailVerified) {
+            // User is logged in, redirect to LoadingScreen
+            val intent = Intent(this, LoadingScreen::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish() // Finish the Login activity so it won't be in the back stack
+            return // Exit the onCreate method to avoid executing the rest of the code
+        }
+
+
         val Email : TextInputEditText = findViewById(R.id.email)
         val Password : TextInputEditText = findViewById(R.id.pass)
         val ProgressBar : ProgressBar = findViewById(R.id.signInProgressBar)
