@@ -1,6 +1,5 @@
 package com.itech.sleepwell
 
-import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -14,12 +13,19 @@ import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class BodyTemperatureDashboard : AppCompatActivity() {
 
     private val splash_time: Long = 10000
     private lateinit var bodyTempValueTextView: TextView
     private lateinit var bodyTempTimestampTextView: TextView
+    private lateinit var database: DatabaseReference
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +41,46 @@ class BodyTemperatureDashboard : AppCompatActivity() {
         bodyTempValueTextView = findViewById(R.id.body_temp_value)
         bodyTempTimestampTextView = findViewById(R.id.body_temp_timestamp)
 
+        // Initialize Firebase Authentication
+        auth = FirebaseAuth.getInstance()
+
+        // Check if user is signed in
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val userId = currentUser.uid
+            // Initialize Firebase Realtime Database with current user's ID
+            database = FirebaseDatabase.getInstance().getReference("SleepwellDevice/Sensor/$userId")
+            setupFirebaseListener()
+        } else {
+            // Handle case where user is not signed in
+            bodyTempValueTextView.text = "No User"
+            bodyTempTimestampTextView.text = "N/A"
+        }
+
         setupUI()
+    }
+
+    private fun setupFirebaseListener() {
+        database.child("temperature").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    // Update the temperature value
+                    val temperature = snapshot.getValue(Double::class.java)
+                    bodyTempValueTextView.text = String.format("%.1f°C", temperature)
+
+                    // Update the timestamp with the current time
+                    val currentTime = System.currentTimeMillis()
+                    val timestamp = android.text.format.DateFormat.format("HH:mm:ss", currentTime)
+                    bodyTempTimestampTextView.text = timestamp.toString()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle errors
+                bodyTempValueTextView.text = "Error"
+                bodyTempTimestampTextView.text = "N/A"
+            }
+        })
     }
 
     private fun setupUI() {

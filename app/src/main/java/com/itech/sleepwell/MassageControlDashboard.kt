@@ -1,29 +1,24 @@
 package com.itech.sleepwell
 
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothSocket
+
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.MenuItem
 import android.widget.Switch
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import java.io.IOException
-import java.io.OutputStream
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class MassageControlDashboard : AppCompatActivity() {
 
-    private var bluetoothSocket: BluetoothSocket? = null
-    private var outputStream: OutputStream? = null
-    private val handler = Handler(Looper.getMainLooper())
+    private lateinit var database: DatabaseReference
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,15 +30,42 @@ class MassageControlDashboard : AppCompatActivity() {
             insets
         }
 
-        // Check Bluetooth status
-        val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled) {
-            showBluetoothAlertDialog()
+        // Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
+
+        // Check if user is signed in
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val userId = currentUser.uid
+            // Initialize Firebase Database reference
+            database = FirebaseDatabase.getInstance().getReference("SleepwellDevice/Sensor/$userId")
         } else {
-            setupUI()
+            Toast.makeText(this, "No user signed in.", Toast.LENGTH_SHORT).show()
+            return
         }
 
+        setupUI()
+        setupSwitchListener()
+    }
 
+    private fun setupSwitchListener() {
+        val switchControl = findViewById<Switch>(R.id.switch_control)
+
+        // Set listener for the switch
+        switchControl.setOnCheckedChangeListener { _, isChecked ->
+            val value = if (isChecked) 1 else 0
+            database.child("channelRelayState1").setValue(value).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(
+                        this,
+                        if (isChecked) "Switched ON" else "Switched OFF",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    Toast.makeText(this, "Failed to update state", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     private fun setupUI() {
@@ -78,50 +100,5 @@ class MassageControlDashboard : AppCompatActivity() {
             false
         }
 
-        val switchControl = findViewById<Switch>(R.id.switch_control)
-        switchControl.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                sendBluetoothData("On")
-                showToast("The Massager is Turning On")
-            } else {
-                sendBluetoothData("Off")
-                showToast("The Massager is Turning Off")
-            }
-        }
-    }
-
-    private fun sendBluetoothData(message: String) {
-        try {
-            outputStream?.write(message.toByteArray())
-        } catch (e: IOException) {
-            e.printStackTrace()
-            showToast("Error sending data")
-        }
-    }
-
-    private fun showToast(message: String) {
-        handler.post { Toast.makeText(this, message, Toast.LENGTH_SHORT).show() }
-    }
-
-    private fun showBluetoothAlertDialog() {
-        AlertDialog.Builder(this)
-            .setTitle("Bluetooth Required")
-            .setMessage("Bluetooth is not enabled. Please enable Bluetooth to use the Massage Control Dashboard.")
-            .setPositiveButton("OK") { _, _ ->
-                startActivity(Intent(this, HomeDashboard::class.java))
-                finish()
-            }
-            .setCancelable(false)
-            .show()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        try {
-            outputStream?.close()
-            bluetoothSocket?.close()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
     }
 }
